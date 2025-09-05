@@ -62,7 +62,7 @@ const CheckIcon = () => (
 
 const PricingPlan = () => {
   return (
-    <section className="bg-white py-14 sm:py-22">
+    <section className="bg-white py-14 sm:py-22" id='pricing'>
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         {/* Main Heading */}
         <div className="max-w-4xl mx-auto text-center">

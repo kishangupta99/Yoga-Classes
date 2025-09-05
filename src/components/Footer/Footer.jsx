@@ -4,7 +4,7 @@ import React from 'react';
 const navigation = {
   about: [
     { name: 'Home', href: '#' },
-    { name: 'Pricing', href: '#' },
+    { name: 'Pricing', href: '#pricing' },
     { name: 'Events', href: '#' },
   ],
   blog: [
@@ -112,7 +112,7 @@ const Footer = () => {
 
         {/* Sub-Footer */}
         <div className="flex flex-col-reverse items-center pt-8 mt-16 border-t border-white/10 sm:mt-20 lg:mt-24 gap-y-4 sm:flex-row sm:justify-between">
-          <p className="text-xs leading-5 text-gray-400">&copy; 2025 Habuild Healthtech Private Limited. All rights reserved.</p>
+          <p className="text-xs leading-5 text-gray-400">&copy; 2025 Yoga Healthtech Private Limited. All rights reserved.</p>
           <div className="flex text-sm text-gray-400 gap-x-6">
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Refund Policy</a>
