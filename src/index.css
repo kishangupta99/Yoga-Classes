@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-family: 'Playfair Display', serif;
+    font-family: 'Titillium Web', sans-serif;
+}
+body {
+  overflow-x: hidden;
+}
+
+.flower-bg {
+    background-repeat: no-repeat;
+    background-position: top right;
+
+}
+
+.flower-bgs {
+    background-image: none;
+}
+
+.animation {
+    width: 100vw;
+    overflow-x: hidden;
+}
