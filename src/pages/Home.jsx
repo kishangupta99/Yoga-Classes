@@ -7,11 +7,13 @@ import MeetYourTrainer from '../components/Trainer/MeetYourTrainer'
 import PricingPlan from '../components/PricingPlan/PricingPlan'
 import FaqSection from '../components/FAQ/FaqSection'
 import Footer from '../components/Footer/Footer'
+import HeroSection from '../components/Hero/HeroSection'
 
 
 const Home = () => {
   return (
     <div className="w-[100vw] overflow-x-hidden">
+      <HeroSection/>
       <TrustedBySection/>
       <BenefitsSection/>
       <ExclusiveBenefits/>
