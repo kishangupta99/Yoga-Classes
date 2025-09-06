@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import trainerImage from "../../assets/trishala.png";
+import api from '../../services/api'; // Make sure this path is correct
 
-
-const LoginForm = () => {
-  // State to manage phone number and password inputs
+const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    phone: '',
+    name: '',
+    mobile: '', // Backend expects 'mobile'
     password: '',
-    name : '', 
   });
 
-  // A single handler to update the form data state
+  const navigate = useNavigate(); // Hook for navigation
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -20,17 +20,28 @@ const LoginForm = () => {
     }));
   };
 
-  // Handler for form submission
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the page from reloading
-    console.log('Attempting to log in with:', formData);
+  // Updated handler for form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Call the '/auth/register' endpoint
+      const response = await api.post('/auth/register', formData);
+
+      // Store token and redirect on success
+      localStorage.setItem('token', response.data.token);
+      navigate('/dashboard'); // Redirect to a protected route
+
+    } catch (err) {
+      console.error('Registration failed:', err.response.data);
+      alert(err.response.data.msg || 'Registration failed. Please try again.');
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-teal-50 via-cyan-50 to-white">
       <main className="w-full max-w-md">
         
-        {/* Header Section from the original design */} 
+        {/* Header Section (no changes here) */}
         <div className="relative overflow-hidden text-center">
           <div className="pt-6 bg-white">
             <div className="inline-block px-4 py-1 text-sm font-bold text-orange-800 rounded-md bg-orange-300/80">
@@ -56,9 +67,9 @@ const LoginForm = () => {
         <div className="p-6 bg-white shadow-lg sm:p-8 rounded-b-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="password" className="sr-only">Name</label>
+              <label htmlFor="name" className="sr-only">Name</label>
               <input
-                type="name"
+                type="text" // Use type="text" for name
                 name="name"
                 id="name"
                 value={formData.name}
@@ -69,7 +80,7 @@ const LoginForm = () => {
               />
             </div>
             <div>
-              <label htmlFor="phone" className="sr-only">phone Number</label>
+              <label htmlFor="mobile" className="sr-only">Mobile Number</label>
               <div className="flex">
                 <div className="flex items-center justify-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
                   <span className="text-lg">🇮🇳</span>
@@ -77,11 +88,11 @@ const LoginForm = () => {
                 </div>
                 <input
                   type="tel"
-                  name="phone"
-                  id="phone"
-                  value={formData.phone}
+                  name="mobile" // Changed from 'phone' to 'mobile'
+                  id="mobile"   // Changed from 'phone' to 'mobile'
+                  value={formData.mobile}
                   onChange={handleInputChange}
-                  placeholder="phone Number"
+                  placeholder="Mobile Number"
                   required
                   className="w-full px-4 py-3 text-black bg-white border border-gray-300 rounded-r-md focus:ring-teal-500 focus:border-teal-500"
                 />
@@ -98,7 +109,7 @@ const LoginForm = () => {
                 onChange={handleInputChange}
                 placeholder="Enter Your Password"
                 required
-                className="w-full px-4 py-3 text-black bg-white border-gray-300 rounded-md bgborder focus:ring-teal-500 focus:border-teal-500"
+                className="w-full px-4 py-3 text-black bg-white border border-gray-300 rounded-md focus:ring-teal-500 focus:border-teal-500"
               />
             </div>
             
@@ -112,7 +123,6 @@ const LoginForm = () => {
           </form>
 
           <div className="mt-4 text-center">
-            {/* Step 2: Use Link component instead of <a> */}
             <Link
               to="/login"
               className="text-sm font-medium text-teal-600 hover:text-teal-500 hover:underline"
@@ -127,4 +137,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
