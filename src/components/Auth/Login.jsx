@@ -10,6 +10,7 @@ const LoginForm = () => {
     password: '',
   });
 
+  
   const navigate = useNavigate(); // Hook for navigation
 
   const handleInputChange = (e) => {
@@ -17,7 +18,7 @@ const LoginForm = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
+    })); 
   };
 
   // Updated handler for form submission
