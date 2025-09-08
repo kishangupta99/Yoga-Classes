@@ -1,59 +1,71 @@
 import React from 'react';
 
-const stats = [
+// 1. Import your main image for this section. 
+//    Update the path to where you've saved the image.
+import teamImage from '../../assets/trainer.png';
+
+// 2. Data for the list of features is kept separate for easy updating.
+const healthFeatures = [
   {
-    value: "1.24 Crore +",
-    label: "Community Members",
-    bgColor: "bg-white",
+    name: 'One-on-One Expert Guidance',
+    description: 'Connect with certified trainers and nutritionists dedicated to your success and well-being.',
   },
   {
-    value: "12+",
-    label: "Years of Experience",
-    bgColor: "bg-slate-100",
+    name: 'Tailored Fitness & Yoga Plans',
+    description: 'Receive personalized workout and yoga routines that adapt to your progress and lifestyle.',
   },
   {
-    value: "4.9/5",
-    label: "Google Rating",
-    bgColor: "bg-white",
+    name: 'Holistic Nutritional Support',
+    description: 'Get easy-to-follow meal plans designed by experts to nourish your body and mind.',
   },
 ];
 
-const TrustedBySection = () => {
+const PersonalHealthTeam = () => {
   return (
     <section className="py-16 bg-white sm:py-24">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-base font-semibold leading-7 text-orange-500">
-            Welcome to Habuild
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Trusted by Members Worldwide
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            We blend the best of old-school knowledge with modern tricks to help you form long-lasting healthy habits.
-          </p>
-        </div>
-        <div className="mt-12">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-8">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                // HOVER EFFECT ADDED: Added transition, scale, and a light blue ring on hover.
-                className={`flex flex-col items-center justify-center rounded-2xl p-8 ${stat.bgColor} transition-all duration-300 ease-in-out hover:scale-105 hover:ring-2 hover:ring-blue-300`}
-              >
-                <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-base leading-7 text-gray-500">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+        {/* --- MODIFIED: Increased gap-x and added lg:gap-x-24 for more space --- */}
+        <div className="grid items-center max-w-2xl grid-cols-1 mx-auto gap-y-16 gap-x-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:gap-x-24">
+          
+          {/* Image Column */}
+          {/* --- MODIFIED: Added lg:-ml-8 to shift the image slightly left on large screens --- */}
+          <div className="flex items-center justify-center lg:-ml-8">
+            <img
+              src={teamImage}
+              alt="Woman meditating with online coach"
+              className="w-full max-w-md shadow-xl rounded-xl ring-1 ring-gray-400/10 lg:max-w-none"
+            />
           </div>
+
+          {/* Text Content Column */}
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              A Personal Health Team, Right in Your Palm
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Get a transformation program that is customized as per your goals and current health conditions. We provide a holistic approach to wellness, combining mind, body, and nutrition.
+            </p>
+            
+            {/* Features List */}
+            <dl className="max-w-xl mt-10 space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+              {healthFeatures.map((feature) => (
+                <div key={feature.name} className="relative pl-9">
+                  <dt className="inline font-semibold text-gray-900">
+                    <svg className="absolute w-5 h-5 text-indigo-600 top-1 left-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clipRule="evenodd" />
+                    </svg>
+                    {feature.name}
+                  </dt>
+                  <dd className="inline"> - {feature.description}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
         </div>
       </div>
     </section>
   );
 };
 
-export default TrustedBySection;
+export default PersonalHealthTeam;
