@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const CallToActionSection = () => {
   return (
@@ -24,6 +25,7 @@ const CallToActionSection = () => {
           </p>
           
           {/* Register Button */}
+          <Link to="/login">
           <div className="mt-12"> {/* Increased margin-top for more space */}
             <a
               href="/register" // <-- Your registration page link
@@ -47,6 +49,7 @@ const CallToActionSection = () => {
               </svg>
             </a>
           </div>
+          </Link>
 
           {/* "Already attended" text with bold, light blue numbers */}
           <p className="mt-8 text-sm leading-6 text-gray-400"> {/* Increased margin-top for more space */}
