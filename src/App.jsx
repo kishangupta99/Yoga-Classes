@@ -3,24 +3,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
+import Home from './pages/Home'; // Your landing page
 import LoginForm from './components/Auth/Login';
 import RegisterForm from './components/Auth/Register';
-import Dashboard from './pages/Dashboard/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard'; // The all-in-one dashboard
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* This route is your normal, full-width desktop page */}
         <Route path="/" element={<Home />} />
-        
-        {/* Your auth routes (can also be full-width or framed) */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         
-        {/* This single route points to your entire self-contained dashboard */}
-        <Route path="/dashboard/*" element={<Dashboard />} />
+        {/* This route now points to your entire self-contained dashboard */}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

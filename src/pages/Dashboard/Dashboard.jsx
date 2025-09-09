@@ -1,28 +1,67 @@
 // src/pages/Dashboard/Dashboard.jsx
 
-//import React, 'react';
-import { Routes, Route } from 'react-router-dom';
-import DashboardLayout from './DashboardLayout'; // We will create this layout component
+import React, { useState } from 'react';
+
+// Import all the components the dashboard will use
+import TopHeader from '../../components/Dashboard/TopHeader';
+import BottomNav from '../../components/Dashboard/BottomNav';
+import ProfileSidebar from '../../components/Dashboard/ProfileSidebar';
+
+// Import all the pages the dashboard will show
 import HomePage from './HomePage';
 import ResourcesPage from './ResourcesPage';
 import ReferralPage from './ReferralPage';
-import EditProfilePage from './EditProfilePage';
+import EditProfilePage from './EditProfilePage'; // <-- Import the EditProfilePage
 
-// This component sets up the routes that live inside the dashboard's mobile view
+const mockUser = { name: 'Akhilesh Ji', karmaPoints: 0 };
+
 const Dashboard = () => {
+  // This state now controls everything we see: 'main', or 'editProfile'
+  const [currentView, setCurrentView] = useState('main'); 
+  const [activeTab, setActiveTab] = useState('home'); // For the bottom nav
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  // Function to render the correct page based on the active tab
+  const renderMainPages = () => {
+    switch (activeTab) {
+      case 'resources':
+        return <ResourcesPage />;
+      case 'referral':
+        return <ReferralPage />;
+      case 'home':
+      default:
+        return <HomePage />;
+    }
+  };
+
   return (
-    // This is the outer wrapper that creates the gray background and centers the frame
     <div className="flex items-center justify-center min-h-screen p-4 bg-slate-100 sm:p-8">
-      {/* This is the mobile frame that contains the entire dashboard */}
-      <div className="relative w-full max-w-sm overflow-hidden shadow-2xl bg-slate-50 rounded-2xl">
-        <Routes>
-          <Route element={<DashboardLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="resources" element={<ResourcesPage />} />
-            <Route path="referral" element={<ReferralPage />} />
-            <Route path="profile/edit" element={<EditProfilePage />} />
-          </Route>
-        </Routes>
+      <div className="w-full max-w-sm bg-white shadow-2xl rounded-2xl overflow-hidden relative h-[844px] max-h-[90vh]">
+        
+        {/* The Top Header is always visible */}
+        <TopHeader user={mockUser} onMenuClick={() => setIsProfileOpen(true)} />
+        
+        {/* Main content area now switches between main pages and the profile editor */}
+        <main className="absolute inset-0 pt-20 pb-24 overflow-y-auto bg-slate-50">
+          {currentView === 'editProfile' ? (
+            <EditProfilePage onBackClick={() => setCurrentView('main')} />
+          ) : (
+            renderMainPages()
+          )}
+        </main>
+        
+        {/* The Bottom Nav is only visible on the main pages */}
+        {currentView === 'main' && (
+          <BottomNav activePage={activeTab} setActivePage={setActiveTab} />
+        )}
+        
+        <ProfileSidebar 
+          user={mockUser} 
+          isOpen={isProfileOpen} 
+          onClose={() => setIsProfileOpen(false)} 
+          // Pass a function to handle the "View Profile" click
+          onViewProfileClick={() => setCurrentView('editProfile')}
+        />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 const TopHeader = ({ user, onMenuClick }) => {
   return (
     // CHANGE: Changed 'fixed' to 'absolute'
-    <header className="absolute top-0 left-0 right-0 z-40 flex items-center justify-between p-4 bg-white shadow-sm">
+    <header className="sticky top-0 left-0 right-0 z-40 flex items-center justify-between p-4 bg-white shadow-sm max-h-[100vh]">
       <div className="flex items-center gap-x-3">
         <button onClick={onMenuClick} className="text-gray-700">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
